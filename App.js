@@ -1,31 +1,27 @@
+import { useState } from "react";
 import {
-  StyleSheet,
   Text,
   View,
-  Button,
-  TextInput,
   TouchableOpacity,
+  TextInput,
+  StyleSheet,
   Image,
 } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Home from "./src/screens/Home";
+import Login from "./src/screens/Login";
 
 export default function App() {
+  const Stack = createNativeStackNavigator();
+
   return (
-    <View style={styles.container}>
-      <View style={styles.formContainer}>
-        <Image source={require("./assets/logo.png")} />
-        <View>
-          <TextInput placeholder="username" style={styles.inputField} />
-          <TextInput
-            placeholder="password"
-            secureTextEntry={true}
-            style={styles.inputField}
-          />
-          <TouchableOpacity style={styles.appButtonContainer}>
-            <Text style={styles.appButtonText}>Login</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Home" component={Home} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
@@ -35,41 +31,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#322659",
     alignItems: "center",
     justifyContent: "center",
-  },
-
-  formContainer: {
-    backgroundColor: "#9BDAF3",
-    alignItems: "center",
-    justifyContent: "center",
-    borderColor: "#000",
-    borderWidth: 1,
-    padding: 30,
-  },
-  image: {},
-
-  inputField: {
-    borderColor: "#000",
-    paddingBottom: 15,
-    paddingTop: 15,
-    paddingLeft: 5,
-    borderWidth: 1,
-    width: 300,
-    marginTop: 20,
-    borderRadius: 5,
-  },
-  appButtonContainer: {
-    elevation: 8,
-    backgroundColor: "#009688",
-    borderRadius: 5,
-    paddingVertical: 15,
-    paddingHorizontal: 12,
-    marginTop: 20,
-  },
-  appButtonText: {
-    fontSize: 18,
-    color: "#fff",
-    fontWeight: "bold",
-    alignSelf: "center",
-    textTransform: "uppercase",
   },
 });
